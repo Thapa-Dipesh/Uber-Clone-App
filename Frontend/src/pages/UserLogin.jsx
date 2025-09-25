@@ -1,18 +1,37 @@
+import axios from "axios";
 import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/UserContext";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({});
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+  const [user, setUser] = useContext(UserDataContext);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setUserData({
+
+    const userData = {
       email: email,
       password: password,
-    });
+    };
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/login`,
+      userData
+    );
+
+    if (response.status === 200) {
+      const data = response.data;
+      setUser(data.user);
+      localStorage.setItem("token", data.token);
+      navigate("/home");
+    }
+
     setEmail("");
     setPassword("");
   };
@@ -29,7 +48,8 @@ const UserLogin = () => {
         <form
           onSubmit={(e) => {
             submitHandler(e);
-          }}>
+          }}
+        >
           <h3 className="text-lg font-medium mb-2">What's your email?</h3>
           <input
             className="bg-[#eeeeee] rounded mb-7 px-4 py-2 border w-full text-lg placeholder:text-base"
@@ -60,7 +80,7 @@ const UserLogin = () => {
         </form>
 
         <p className="text-center">
-          New Here? 
+          New Here?
           <Link to="/signup" className="text-blue-600">
             Create new Account
           </Link>
@@ -70,7 +90,8 @@ const UserLogin = () => {
       <div>
         <Link
           to="/captain-login"
-          className="bg-yellow-600 text-white flex items-center justify-center font-semibold rounded mb-5 px-4 py-2 w-full text-lg placeholder:text-base">
+          className="bg-yellow-600 text-white flex items-center justify-center font-semibold rounded mb-5 px-4 py-2 w-full text-lg placeholder:text-base"
+        >
           Sign in as Captain
         </Link>
       </div>
