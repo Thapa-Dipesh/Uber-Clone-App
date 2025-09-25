@@ -23,7 +23,7 @@ module.exports.createCaptain = async ({
   }
 
   const captain = captainModel.create({
-    fulname: { firstname, lastname },
+    fullname: { firstname, lastname },
     email,
     password,
     vehicle: { color, plate, capacity, vehicleType },
