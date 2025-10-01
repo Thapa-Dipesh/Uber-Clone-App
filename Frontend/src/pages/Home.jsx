@@ -3,13 +3,18 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 import LocationSearchPanel from "../components/LocationSearchPanel";
+import VehiclePanel from "../components/VehiclePanel";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
   const [panelOpen, setPanelOpen] = useState(false);
+
+  const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
+
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
+  const vehiclePanelRef = useRef(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,8 +43,23 @@ const Home = () => {
     [panelOpen]
   );
 
+  useGSAP(
+    function () {
+      if (vehiclePanelOpen) {
+        gsap.to(vehiclePanelRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(vehiclePanelRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [vehiclePanelOpen]
+  );
+
   return (
-    <div className="h-screen relative">
+    <div className="h-screen relative overflow-hidden">
       <img
         className="w-16 absolute left-5 top-5"
         src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
@@ -62,7 +82,7 @@ const Home = () => {
             onClick={() => {
               setPanelOpen(false);
             }}
-            className="absolute top-6 right-6 text-2xl opacity-0"
+            className="absolute top-6 right-6 text-2xl opacity-0 text-gray-400"
           >
             <i className="ri-arrow-down-wide-line"></i>
           </h5>
@@ -101,8 +121,18 @@ const Home = () => {
         </div>
 
         <div ref={panelRef} className="h-[0%] bg-white">
-          <LocationSearchPanel />
+          <LocationSearchPanel
+            setPanelOpen={setPanelOpen}
+            setVehiclePanelOpen={setVehiclePanelOpen}
+          />
         </div>
+      </div>
+
+      <div
+        ref={vehiclePanelRef}
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-4 pb-8"
+      >
+        <VehiclePanel setVehiclePanelOpen={setVehiclePanelOpen} />
       </div>
     </div>
   );
