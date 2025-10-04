@@ -1,11 +1,13 @@
-const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound }) => {
+import React from "react";
+
+const WaitingForDriver = ({ setWaitingForDriver }) => {
   return (
     <div>
       <div className="flex justify-between mb-5 ">
-        <h3 className="text-2xl font-semibold ">Confirm your Ride </h3>
+        <h3 className="text-2xl font-semibold ">Captain's Details</h3>
         <h5
           onClick={() => {
-            setConfirmRidePanel(false);
+            setWaitingForDriver(false);
           }}
           className="text-2xl text-gray-400"
         >
@@ -13,13 +15,21 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound }) => {
         </h5>
       </div>
 
-      <div className="flex flex-col justify-between items-center gap-2">
+      <div className="flex items-center justify-between">
         <img
-          className="h-32"
+          className="h-20"
           src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=956/height=538/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85MDM0YzIwMC1jZTI5LTQ5ZjEtYmYzNS1lOWQyNTBlODIxN2EucG5n"
           alt="uber-car-image"
         />
 
+        <div className="text-right">
+          <h2 className="text-lg font-medium">Driver</h2>
+          <h4 className="text-xl font-semibold -mt-2">Ga 22 Pa 2255</h4>
+          <p className="text-sm text-gray-600">Maruti Suzuki Alto</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between items-center gap-2">
         <div className="w-full mt-5">
           <div className="flex items-center gap-5 p-3 border-b-2">
             <i className="text-lg ri-map-pin-fill"></i>
@@ -45,19 +55,9 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound }) => {
             </div>
           </div>
         </div>
-
-        <button
-          onClick={() => {
-            setVehicleFound(true);
-            setConfirmRidePanel(false);
-          }}
-          className="w-full mt-5 bg-green-600 text-white text-lg font-semibold p-2 rounded-lg"
-        >
-          Confirm
-        </button>
       </div>
     </div>
   );
 };
 
-export default ConfirmRide;
+export default WaitingForDriver;

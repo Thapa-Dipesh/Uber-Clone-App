@@ -1,11 +1,13 @@
-const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound }) => {
+import React from "react";
+
+const LookingForDriver = ({ setVehicleFound }) => {
   return (
     <div>
       <div className="flex justify-between mb-5 ">
-        <h3 className="text-2xl font-semibold ">Confirm your Ride </h3>
+        <h3 className="text-2xl font-semibold ">Looking For a Driver</h3>
         <h5
           onClick={() => {
-            setConfirmRidePanel(false);
+            setVehicleFound(false);
           }}
           className="text-2xl text-gray-400"
         >
@@ -45,19 +47,9 @@ const ConfirmRide = ({ setConfirmRidePanel, setVehicleFound }) => {
             </div>
           </div>
         </div>
-
-        <button
-          onClick={() => {
-            setVehicleFound(true);
-            setConfirmRidePanel(false);
-          }}
-          className="w-full mt-5 bg-green-600 text-white text-lg font-semibold p-2 rounded-lg"
-        >
-          Confirm
-        </button>
       </div>
     </div>
   );
 };
 
-export default ConfirmRide;
+export default LookingForDriver;
