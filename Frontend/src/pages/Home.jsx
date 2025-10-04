@@ -4,6 +4,7 @@ import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/VehiclePanel";
+import ConfirmRide from "../components/ConfirmRide";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -11,10 +12,12 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false);
 
   const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
+  const [confirmRidePanel, setConfirmRidePanel] = useState(false);
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
   const vehiclePanelRef = useRef(null);
+  const confirmRidePannelRef = useRef(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -43,6 +46,7 @@ const Home = () => {
     [panelOpen]
   );
 
+  // for choosing vehicle
   useGSAP(
     function () {
       if (vehiclePanelOpen) {
@@ -56,6 +60,22 @@ const Home = () => {
       }
     },
     [vehiclePanelOpen]
+  );
+
+  // for confirming ride
+  useGSAP(
+    function () {
+      if (confirmRidePanel) {
+        gsap.to(confirmRidePannelRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(confirmRidePannelRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [confirmRidePanel]
   );
 
   return (
@@ -128,11 +148,23 @@ const Home = () => {
         </div>
       </div>
 
+      {/* choosing vehicle panel ui */}
       <div
         ref={vehiclePanelRef}
         className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-4 pb-8"
       >
-        <VehiclePanel setVehiclePanelOpen={setVehiclePanelOpen} />
+        <VehiclePanel
+          setVehiclePanelOpen={setVehiclePanelOpen}
+          setConfirmRidePanel={setConfirmRidePanel}
+        />
+      </div>
+
+      {/* details of vehicle  */}
+      <div
+        ref={confirmRidePannelRef}
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-4 pb-8"
+      >
+        <ConfirmRide setConfirmRidePanel={setConfirmRidePanel} />
       </div>
     </div>
   );
