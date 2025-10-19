@@ -26,7 +26,7 @@ const CaptainsDetails = () => {
         </div>
 
         <div className="text-center ">
-          <i className="ri-speed-up-lin mb-2e text32xl font-thin"></i>
+          <i className="ri-speed-up-line mb-2 text-3xl font-thin"></i>
           <h5 className="text-lg font-medium">10.5</h5>
           <p className="text-sm text-gray-600">Hours Online</p>
         </div>
