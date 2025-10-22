@@ -1,6 +1,6 @@
 import React from "react";
 
-const RidePopUp = ({ setRidePopupPanel }) => {
+const RidePopUp = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
   return (
     <div>
       <div className="flex justify-between mb-5 ">
@@ -54,15 +54,20 @@ const RidePopUp = ({ setRidePopupPanel }) => {
           </div>
         </div>
 
-        <button className="w-full mt-5 bg-green-600 text-white text-lg font-semibold p-2 rounded-lg">
-          Confirm
+        <button
+          className="w-full mt-5 bg-green-600 text-white text-lg font-semibold p-2 rounded-lg"
+          onClick={() => {
+            setConfirmRidePopupPanel(true);
+          }}
+        >
+          Accept
         </button>
 
         <button
+          className="w-full mt-1 bg-gray-300 text-gray-700 text-lg font-semibold p-2 rounded-lg"
           onClick={() => {
             setRidePopupPanel(false);
           }}
-          className="w-full mt-1 bg-gray-300 text-gray-700 text-lg font-semibold p-2 rounded-lg"
         >
           Ignore
         </button>
