@@ -1,7 +1,29 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CaptainsDetails from "../components/CaptainsDetails";
+import RidePopUp from "../components/RidePopUp";
 
 const CaptainHome = () => {
+  const [ridePopupPanel, setRidePopupPanel] = useState(false);
+  const ridePopupPanelRef = useRef(null);
+
+  useGSAP(
+    function () {
+      if (ridePopupPanel) {
+        gsap.to(ridePopupPanelRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(ridePopupPanelRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [ridePopupPanel]
+  );
+
   return (
     <div className="h-screen">
       <div className=" fixed top-0 p-6 flex items-center justify-between w-screen">
@@ -28,6 +50,13 @@ const CaptainHome = () => {
 
       <div className="h-2/5 p-6">
         <CaptainsDetails />
+      </div>
+
+      <div
+        ref={ridePopupPanelRef}
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-4 pb-8"
+      >
+        <RidePopUp setRidePopupPanel={setRidePopupPanel} />
       </div>
     </div>
   );
