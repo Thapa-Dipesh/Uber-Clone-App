@@ -1,20 +1,13 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ConfirmRidePopUp = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
-  const [otp, setOtp] = useState("");
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
-
+const FinishRide = ({ setFinishRidePanel }) => {
   return (
     <div>
       <div className="flex justify-between mb-5 ">
-        <h3 className="text-2xl font-semibold ">Confirm this ride to start</h3>
+        <h3 className="text-2xl font-semibold ">Finish this Ride</h3>
         <h5
           onClick={() => {
-            setConfirmRidePopupPanel(false);
+            setFinishRidePanel(false);
           }}
           className="text-2xl text-gray-400"
         >
@@ -22,7 +15,7 @@ const ConfirmRidePopUp = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
         </h5>
       </div>
 
-      <div className="flex items-center justify-between mt-3 p-3 bg-yellow-400 rounded-lg">
+      <div className="flex items-center justify-between mt-3 p-4 border-2 border-yellow-400 rounded-lg">
         <div className="flex items-center gap-3">
           <img
             className="h-12 w-12 rounded-full object-cover"
@@ -61,42 +54,17 @@ const ConfirmRidePopUp = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
           </div>
         </div>
 
-        <div className="mt-8 w-full">
-          <form
-            onSubmit={(e) => {
-              submitHandler(e);
-            }}
+        <div className="mt-10 w-full">
+          <Link
+            to={"/captain-home"}
+            className="w-full flex justify-center bg-green-600 text-white text-lg font-semibold p-2 mb-3 rounded-lg"
           >
-            <input
-              type="text"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={(e) => {
-                setOtp(e.target.value);
-              }}
-              className="bg-[#eee] px-6 py-3 font-mono text-xl rounded-lg w-full mb-8"
-            />
-            <Link
-              to={"/captain-riding"}
-              className="w-full flex justify-center bg-green-600 text-white text-lg font-semibold p-2 mb-3 rounded-lg"
-            >
-              Confirm
-            </Link>
-
-            <button
-              className="w-full bg-red-500 text-white text-lg font-semibold p-2 rounded-lg"
-              onClick={() => {
-                setRidePopupPanel(false);
-                setConfirmRidePopupPanel(false);
-              }}
-            >
-              Cancel
-            </button>
-          </form>
+            Finish Ride
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default ConfirmRidePopUp;
+export default FinishRide;
