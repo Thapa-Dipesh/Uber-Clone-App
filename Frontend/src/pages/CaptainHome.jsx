@@ -51,10 +51,10 @@ const CaptainHome = () => {
         <img
           className="w-16"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-          alt="uber img"
+          alt="uber-img"
         />
         <Link
-          to={"/home"}
+          to={"/captain-home"}
           className="h-10 w-10 bg-gray-400 flex items-center justify-center rounded-full"
         >
           <i className="ri-logout-box-r-line text-lg font-medium"></i>
@@ -65,7 +65,7 @@ const CaptainHome = () => {
         <img
           className="h-full w-full object-cover"
           src="https://www.medianama.com/wp-content/uploads/2018/06/Screenshot_20180619-112715.png.png"
-          alt=""
+          alt="map-img"
         />
       </div>
 
