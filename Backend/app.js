@@ -10,8 +10,15 @@ const captainRoutes = require("./routes/captain.routes.js");
 const mapsRoutes = require("./routes/maps.routes");
 
 connectToDb();
+const allowedOrigin = process.env.FRONTEND_URL;
+const corsOptions = {
+  origin: allowedOrigin,
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
